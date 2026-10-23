@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CyberSentinel Global Styles ─── */
+
+:root {
+  --cyber-bg: #080c14;
+  --cyber-surface: #0d1520;
+  --cyber-cyan: #00d4ff;
+  --cyber-border: rgba(0, 212, 255, 0.15);
+  --cyber-glow: rgba(0, 212, 255, 0.3);
+
+  --severity-critical: #ff3040;
+  --severity-high: #f97316;
+  --severity-medium: #f59e0b;
+  --severity-low: #3b82f6;
+  --severity-info: #6b7280;
+
+  --status-secure: #10b981;
+  --status-warning: #f59e0b;
+  --status-danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--cyber-bg);
+  color: #e2e8f0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cyber-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.4);
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: rgba(13, 21, 32, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: 12px;
+}
+
+.glass-card-hover {
+  @apply glass-card transition-all duration-300;
+}
+.glass-card-hover:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+/* ─── Cyber Button ─── */
+.btn-cyber {
+  @apply relative px-6 py-2.5 font-medium text-sm tracking-wider uppercase transition-all duration-200;
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05));
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  color: var(--cyber-cyan);
+  border-radius: 6px;
+  letter-spacing: 0.08em;
+  overflow: hidden;
+}
+.btn-cyber::before {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-200;
+  background: rgba(0, 212, 255, 0.1);
+}
+.btn-cyber:hover::before {
+  opacity: 1;
+}
+.btn-cyber:hover {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+  border-color: var(--cyber-cyan);
+}
+
+.btn-critical {
+  @apply btn-cyber;
+  border-color: rgba(255, 48, 64, 0.5);
+  color: var(--severity-critical);
+}
+.btn-critical:hover {
+  box-shadow: 0 0 20px rgba(255, 48, 64, 0.25);
+}
+
+/* ─── Severity Badges ─── */
+.badge-critical {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider;
+  background: rgba(255, 48, 64, 0.15);
+  color: var(--severity-critical);
+  border: 1px solid rgba(255, 48, 64, 0.3);
+}
+.badge-high {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider;
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--severity-high);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+.badge-medium {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider;
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--severity-medium);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.badge-low {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--severity-low);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+.badge-info {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider;
+  background: rgba(107, 114, 128, 0.15);
+  color: #9ca3af;
+  border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* ─── Cyber Input ─── */
+.cyber-input {
+  @apply w-full px-4 py-3 text-sm outline-none transition-all duration-200;
+  background: rgba(13, 21, 32, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-family: inherit;
+}
+.cyber-input:focus {
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+.cyber-input::placeholder {
+  color: #4b5563;
+}
+
+/* ─── Cyber Text ─── */
+.text-cyber-cyan { color: var(--cyber-cyan); }
+.text-cyber-secure { color: var(--status-secure); }
+.text-cyber-warning { color: var(--status-warning); }
+.text-cyber-danger { color: var(--status-danger); }
+
+/* ─── Animated Background Grid ─── */
+.cyber-grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Scan Line Effect ─── */
+.scan-line::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.5), transparent);
+  animation: scan-line 3s linear infinite;
+}
+
+/* ─── Glow Effects ─── */
+.glow-cyan { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+.glow-critical { text-shadow: 0 0 10px rgba(255, 48, 64, 0.5); }
+.glow-secure { text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+
+/* ─── Monospace Elements ─── */
+.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Terminal ─── */
+.cyber-terminal {
+  @apply glass-card p-4 font-mono text-sm;
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 212, 255, 0.2);
+}
+
+/* ─── Page wrapper ─── */
+.page-wrapper {
+  @apply min-h-screen relative;
+  background-color: var(--cyber-bg);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
