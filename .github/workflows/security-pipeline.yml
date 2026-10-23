@@ -147,22 +147,12 @@ jobs:
         run: docker build -t cybersentinel-frontend:${{ github.sha }} ./frontend
 
       - name: Scan backend with Trivy
-        uses: aquasecurity/trivy-action@v0.28.0
-        continue-on-error: true
-        with:
-          image-ref: 'cybersentinel-backend:${{ github.sha }}'
-          format: 'table'
-          exit-code: '0'
-          severity: 'CRITICAL,HIGH'
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 0 cybersentinel-backend:${{ github.sha }} || true
 
       - name: Scan frontend with Trivy
-        uses: aquasecurity/trivy-action@v0.28.0
-        continue-on-error: true
-        with:
-          image-ref: 'cybersentinel-frontend:${{ github.sha }}'
-          format: 'table'
-          exit-code: '0'
-          severity: 'CRITICAL,HIGH'
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 0 cybersentinel-frontend:${{ github.sha }} || true
 
   # ── Security Gate ────────────────────────────────────────────────────────────
   security-gate:
