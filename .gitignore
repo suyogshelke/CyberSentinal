@@ -76,6 +76,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .eslintcache
+*.timestamp-*.mjs
+*.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
